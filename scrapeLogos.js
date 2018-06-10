@@ -16,7 +16,7 @@ let download = function(uri, filename, callback){
 };
 
 sites.forEach((site) => {
-  var url = new URL(site.site_url)
+  let url = new URL(site.site_url)
   axios.get(url.origin).then((response) => {
     let html = response.data;
     let $ = cheerio.load(html)
