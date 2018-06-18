@@ -5,9 +5,9 @@ const request = require("request");
 const xlsx = require("xlsx");
 const { URL } = require("url");
 
-const workbook = xlsx.readFile('all_logos_test.xlsx');
+const workbook = xlsx.readFile('cleanedLogos.xlsx');
 const sheet_name_list = workbook.SheetNames;
-const sites = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]])
+const sites = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]])
 
 let download = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
@@ -30,7 +30,7 @@ sites.forEach((site) => {
             let html = response.data;
             let $ = cheerio.load(html)   
             $("img").each(function (index) {               
-                if (index < 4) {
+                if (index < 5) {
                     let img = $(this).attr("src");
                     if (img.indexOf("logo") >= 0) {
                         let imgLink;
