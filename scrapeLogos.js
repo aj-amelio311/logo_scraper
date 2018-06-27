@@ -5,13 +5,13 @@ const request = require("request");
 const xlsx = require("xlsx");
 const { URL } = require("url");
 
-const workbook = xlsx.readFile('cleanedLogos.xlsx');
+const workbook = xlsx.readFile('sites.xlsx');
 const sheet_name_list = workbook.SheetNames;
-const sites = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]])
+const sites = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]])
 
 let download = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
-        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback); 
+        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
     });
 };
 
@@ -28,8 +28,8 @@ sites.forEach((site) => {
     axios.get(url.origin).then((response) => {
         if (response.status === 200 && response !== undefined) {
             let html = response.data;
-            let $ = cheerio.load(html)   
-            $("img").each(function (index) {               
+            let $ = cheerio.load(html)
+            $("img").each(function (index) {
                 if (index < 5) {
                     let img = $(this).attr("src");
                     if (img.indexOf("logo") >= 0) {
@@ -46,7 +46,7 @@ sites.forEach((site) => {
                             imagepath: img,
                             siteId: site.site_id,
                             extension: "." + imgLink.slice((imgLink.lastIndexOf(".") - 1 >>> 0) + 2).split("?").shift().split(";").shift()
-                        }              
+                        }
                         axios.get(obj.logo).then((response) => {
                             increment++;
                             if (response.status === 200) {
@@ -59,9 +59,8 @@ sites.forEach((site) => {
                         })
                     }
                 }
-            });           
+            });
         }
     }).catch((e) => {
     });
 })
-
