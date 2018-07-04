@@ -8,6 +8,8 @@ Directions:
 
 -Create a folder called "output" in the project directory
 
+-To execute, run the cluster script for increased performance
+
 
 How It Works:
  
