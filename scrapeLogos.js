@@ -5,9 +5,9 @@ const request = require("request");
 const xlsx = require("xlsx");
 const { URL } = require("url");
 
-const workbook = xlsx.readFile('sites.xlsx');
+const workbook = xlsx.readFile('cleanedLogos1.xlsx');
 const sheet_name_list = workbook.SheetNames;
-const sites = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]])
+const sites = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]])
 
 let download = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
