@@ -5,7 +5,7 @@ const request = require("request");
 const xlsx = require("xlsx");
 const { URL } = require("url");
 
-const workbook = xlsx.readFile('cleanedLogos1.xlsx');
+const workbook = xlsx.readFile('cleanedLogos2.xlsx');
 const sheet_name_list = workbook.SheetNames;
 const sites = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]])
 
